@@ -1,4 +1,4 @@
-import GlitchButton from "@/components/GlitchButton";
+import GlowLink from "@/components/GlowLink";
 import { Command, Star } from "lucide-react";
 
 export default function Home() {
@@ -15,8 +15,13 @@ export default function Home() {
       </div>
 
       <div className="flex gap-32 z-10">
-        <GlitchButton href="/dev" Icon={Command} label="dev" iconSize={120} />
-        <GlitchButton href="/audio" Icon={Star} label="audio" iconSize={120} />
+        <GlowLink href="/dev" label="dev">
+          <Command size={120} strokeWidth={1.5} />
+        </GlowLink>
+        
+        <GlowLink href="/audio" label="audio">
+          <Star size={120} strokeWidth={1.5} />
+        </GlowLink>
       </div>
       
     </main>
