@@ -39,7 +39,7 @@ function CoverItem({
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
-    const force = 15;
+    const force = 9;
     const deltaX = (centerX - e.clientX) / (rect.width / 2);
     const deltaY = (centerY - e.clientY) / (rect.height / 2);
 
