@@ -1,37 +1,57 @@
 "use client";
 
-import ProjectCard from "@/components/ProjectCard";
-import { motion, Variants } from "framer-motion";
+import CoverFlow, { AudioProject } from "@/components/CoverFlow";
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2, // Tu ritmo perfecto de cascada
-    },
+// Nuestra base de datos "manual" temporal
+const audioProjects: AudioProject[] = [
+  {
+    id: "1",
+    title: "Nocturne EP",
+    artist: "Jorge Porragas",
+    description: "A dark, atmospheric exploration of granular synthesis and heavy low-end. Completely produced, mixed, and mastered in-the-box.",
+    coverImage: "#1c1917", // Carbón
+    tags: ["Ableton Live", "Sound Design", "Mixing"],
+    platformUrl: "https://spotify.com/...", // Listo para el futuro
   },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  show: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 260,
-      damping: 20,
-    }
+  {
+    id: "2",
+    title: "Neon Pulse",
+    artist: "Jorge Porragas",
+    description: "High-energy synthwave track focusing on analog modeling and aggressive drum bus processing.",
+    coverImage: "#4c1d95", // Púrpura profundo
+    tags: ["Synthesis", "Analog Modeling", "Production"],
   },
-};
+  {
+    id: "3",
+    title: "Cinematic Soundscape Vol. 1",
+    artist: "Jorge Porragas",
+    description: "Original scoring project designed for tension and release. Featuring custom foley recordings and orchestral arrangements.",
+    coverImage: "#064e3b", // Esmeralda oscuro
+    tags: ["Scoring", "Foley", "Arrangement"],
+  },
+  {
+    id: "4",
+    title: "Unreleased B-Side",
+    artist: "Jorge Porragas",
+    description: "Raw, unmixed studio session bounce. Capturing the immediate energy of a live jam before post-production.",
+    coverImage: "#7f1d1d", // Rojo oscuro
+    tags: ["Live Jam", "Raw Audio", "Experiment"],
+  },
+  {
+    id: "5",
+    title: "Urban Textures",
+    artist: "Jorge Porragas",
+    description: "A collection of field recordings processed through various modular effects chains to create playable melodic instruments.",
+    coverImage: "#1e3a8a", // Azul oscuro
+    tags: ["Field Recording", "Processing", "Modular"],
+  }
+];
 
 export default function AudioPage() {
   return (
-    <main className="min-h-screen flex flex-col items-center pt-32 pb-24 px-8 relative">
+    <main className="min-h-screen flex flex-col items-center pt-32 pb-24 px-8 relative overflow-hidden">
       
-      {/* Título de la Sección */}
-      <div className="w-full max-w-5xl mb-16">
+      <div className="w-full max-w-5xl mb-12">
         <h1 className="text-5xl font-light text-gray-400 tracking-widest mb-4">
           / <span className="text-white font-medium">audio</span>
         </h1>
@@ -40,51 +60,11 @@ export default function AudioPage() {
         </p>
       </div>
 
-      {/* Grid Animado */}
-      <motion.div 
-        className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8"
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-      >
-        
-        <motion.div variants={itemVariants}>
-          <ProjectCard 
-            title="Debut EP Production"
-            description="Full-cycle production, from sound design and arrangement to final mixdown. Exploring atmospheric textures and heavy low-end."
-            tags={["Ableton Live", "Production", "Mixing"]}
-            images={["#450a0a", "#7f1d1d", "#991b1b"]} // Tonos rojo oscuro
-          />
-        </motion.div>
+      {/* Inyectamos nuestro nuevo componente 3D */}
+      <div className="w-full mt-10">
+        <CoverFlow projects={audioProjects} />
+      </div>
 
-        <motion.div variants={itemVariants}>
-          <ProjectCard 
-            title="Indie Film Scoring"
-            description="Original soundtrack and foley for an independent short film. Focused on creating tension through analog synthesis and organic recordings."
-            tags={["Sound Design", "Foley", "Synthesis"]}
-            images={["#1c1917", "#292524", "#44403c"]} // Tonos carbón
-          />
-        </motion.div>
-
-        <motion.div variants={itemVariants}>
-          <ProjectCard 
-            title="Freelance Mix & Master"
-            description="Audio engineering services for independent artists. Providing clarity, width, and competitive loudness standards for streaming platforms."
-            tags={["Mixing", "Mastering", "Audio Engineering"]}
-            images={["#0f172a", "#1e293b", "#334155"]} // Tonos slate/acero
-          />
-        </motion.div>
-
-        <motion.div variants={itemVariants}>
-          <ProjectCard 
-            title="Sample Pack Vol. 1"
-            description="A curated collection of royalty-free drum breaks, atmospheric pads, and granular synth textures crafted for modern electronic producers."
-            tags={["Sound Design", "Sampling", "Processing"]}
-            images={["#3f2ccb", "#4338ca", "#4f46e5"]} // Tonos índigo profundos
-          />
-        </motion.div>
-
-      </motion.div>
     </main>
   );
 }
