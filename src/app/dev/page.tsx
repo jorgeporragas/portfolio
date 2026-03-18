@@ -56,6 +56,7 @@ export default function DevPage() {
             description="A dedicated mobile application designed to streamline the management of music projects, sessions, and audio assets."
             tags={["Swift", "SwiftUI", "iOS"]}
             images={["#1A1A1A", "#2C2C2E", "#3A3A3C"]} 
+            projectUrl="https://github.com/jorgeporragas/meedee"
           />
         </motion.div>
 
