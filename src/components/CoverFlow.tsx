@@ -3,6 +3,7 @@
 import { useState, useRef, MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Headphones, Radio, PlayCircle } from "lucide-react";
+import { useMagneticHover } from "@/hooks/useMagneticHover";
 
 export interface AudioProject {
   id: string;
@@ -18,44 +19,16 @@ export interface AudioProject {
 // 1. SUB-COMPONENTE: El Disco Individual
 // --------------------------------------------------------
 function CoverItem({ 
-  project, 
-  index, 
-  activeIndex, 
-  setActiveIndex,
-  isMenuOpen,
-  setIsMenuOpen
+  project, index, activeIndex, setActiveIndex, isMenuOpen, setIsMenuOpen
 }: { 
-  project: AudioProject; 
-  index: number; 
-  activeIndex: number; 
-  setActiveIndex: (idx: number) => void;
-  isMenuOpen: boolean;
-  setIsMenuOpen: (val: boolean) => void;
+  project: AudioProject; index: number; activeIndex: number; setActiveIndex: (idx: number) => void; isMenuOpen: boolean; setIsMenuOpen: (val: boolean) => void;
 }) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const ref = useRef<HTMLDivElement>(null);
+  const { position, ref, handleMouseMove, handleMouseLeave } = useMagneticHover(9);
 
   const offset = index - activeIndex;
   const isActive = offset === 0;
 
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const force = 9;
-    const deltaX = (centerX - e.clientX) / (rect.width / 2);
-    const deltaY = (centerY - e.clientY) / (rect.height / 2);
-
-    setPosition({ x: deltaX * force, y: deltaY * force });
-  };
-
-  const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
-  };
-
-  const handleDiskClick = (e: MouseEvent) => {
+  const handleDiskClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (!isActive) {
       setActiveIndex(index);
@@ -64,8 +37,7 @@ function CoverItem({
       setIsMenuOpen(!isMenuOpen);
     }
   };
-
-  // 1. Coordenadas Invertidas: Ahora saltan hacia la izquierda (valores X negativos)
+// Menu radial con enlaces a plataformas (solo para el proyecto activo)
   const radialButtons = [
     { id: 'spotify', icon: <Headphones size={20} />, x: -250, y: -110, delay: 0 },
     { id: 'apple', icon: <Radio size={20} />, x: -310, y: 0, delay: 0.05 },
@@ -159,7 +131,7 @@ function CoverItem({
           isActive 
             ? (isMenuOpen 
                 ? "shadow-[0_0_40px_rgba(153,170,255,0.2)]" 
-                : "shadow-[0_0_40px_rgba(153,170,255,0.2)] hover:shadow-[0_0_90px_rgba(153,170,255,1)]")
+                : "shadow-[0_0_40px_rgba(153,170,255,0.2)] hover:shadow-[0_0_60px_rgba(153,170,255,0.4)]")
             : (isMenuOpen 
                 ? "" 
                 : "hover:shadow-[0_0_30px_rgba(153,170,255,0.4)]")

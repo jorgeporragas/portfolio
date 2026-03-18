@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
-// 1. Extraemos los datos para que el código sea limpio y escalable
 const devProjects = [
   {
     id: "meedee",
@@ -39,118 +37,73 @@ const devProjects = [
 ];
 
 export default function DevPage() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(1); // 1 = derecha, -1 = izquierda
-
-  const nextProject = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev === devProjects.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevProject = () => {
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev === 0 ? devProjects.length - 1 : prev - 1));
-  };
-
-  // Variantes de animación para el deslizamiento
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 100 : -100,
-      opacity: 0,
-      scale: 0.95,
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-      scale: 1,
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 100 : -100,
-      opacity: 0,
-      scale: 0.95,
-    }),
-  };
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <main className="min-h-screen flex flex-col items-center pt-32 pb-24 px-8 relative overflow-hidden">
+    // 1. Reducimos el padding vertical: de pt-32 a pt-24 y pb-24 a pb-12
+    <main className="min-h-screen flex flex-col items-center pt-24 pb-12 px-8 relative overflow-hidden">
       
-      <div className="w-full max-w-5xl mb-12">
+      {/* 2. Reducimos el margen inferior del título (mb-4 a mb-2) */}
+      <div className="w-full max-w-5xl mb-2 relative z-20">
         <h1 className="text-5xl font-light text-gray-400 tracking-widest mb-4">
           / <span className="text-white font-medium">dev</span>
         </h1>
         <p className="text-gray-500 text-lg flex items-center gap-4">
           selected works & experiments.
-          <span className="text-sm px-3 py-1 bg-white/5 rounded-full border border-white/10">
-            {currentIndex + 1} of {devProjects.length}
-          </span>
         </p>
       </div>
 
-      {/* EL CARRUSEL 2D */}
-      <div className="relative w-full max-w-2xl flex items-center justify-center mt-4">
-        
-        {/* Botón Anterior (Flotando a la izquierda) */}
-        <button 
-          onClick={prevProject}
-          className="absolute -left-16 md:-left-24 z-10 p-4 text-gray-500 hover:text-white transition-colors hover:scale-110 active:scale-95"
-        >
-          <ChevronLeft size={40} strokeWidth={1} />
-        </button>
+      {/* 3. ESCENARIO 3D: Reducimos la altura de h-[650px] a h-[480px] o h-[50vh], y quitamos el mt-8 */}
+      <div 
+        className="relative w-full max-w-6xl h-[480px] flex justify-center items-center mt-2"
+        style={{ perspective: 1200 }} 
+      >
+        {devProjects.map((project, index) => {
+          const offset = index - activeIndex;
+          const isActive = offset === 0;
 
-        {/* Contenedor de la Tarjeta Animada */}
-        <div className="w-full relative flex justify-center h-[550px] perspective-[1000px]">
-          <AnimatePresence custom={direction} mode="wait">
+          return (
             <motion.div
-              key={currentIndex}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.2 },
-                scale: { duration: 0.2 }
+              key={project.id}
+              animate={{
+                // 1. Separación de 300px (las tarjetas son más anchas que los discos)
+                x: offset * 300,
+                // 2. Rotación de 35 grados (suficiente para el efecto, pero permite leer el título lateral)
+                rotateY: isActive ? 0 : offset > 0 ? -35 : 35,
+                // 3. Las de atrás se encogen un poco más para no estorbar
+                
+                scale: isActive ? 1 : 0.8,
+                opacity: Math.abs(offset) > 2 ? 0 : isActive ? 1 : 0.3,
+                zIndex: 10 - Math.abs(offset),
               }}
-              className="absolute w-full"
+              transition={{ type: "spring", stiffness: 260, damping: 25 }}
+              // Fijamos el ancho de la tarjeta para que todas midan igual en el carrusel
+              className="absolute w-[340px] md:w-[420px]"
+              whileHover={{ scale: isActive ? 1.05 : 0.8 }}
             >
-              <ProjectCard 
-                title={devProjects[currentIndex].title}
-                description={devProjects[currentIndex].description}
-                tags={devProjects[currentIndex].tags}
-                images={devProjects[currentIndex].images}
-                projectUrl={devProjects[currentIndex].projectUrl}
-              />
+              
+              {/* ESCUDO INVISIBLE: Si no es la tarjeta activa, intercepta el clic para traerla al frente */}
+              {!isActive && (
+                <div 
+                  className="absolute inset-0 z-50 cursor-pointer" 
+                  onClick={() => setActiveIndex(index)} 
+                />
+              )}
+
+              {/* Tu componente intacto */}
+              <div className={`transition-all duration-500 ${!isActive ? "pointer-events-none filter brightness-50" : ""}`}>
+                <ProjectCard 
+                  title={project.title}
+                  description={project.description}
+                  tags={project.tags}
+                  images={project.images}
+                  projectUrl={project.projectUrl}
+                />
+              </div>
+
             </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Botón Siguiente (Flotando a la derecha) */}
-        <button 
-          onClick={nextProject}
-          className="absolute -right-16 md:-right-24 z-10 p-4 text-gray-500 hover:text-white transition-colors hover:scale-110 active:scale-95"
-        >
-          <ChevronRight size={40} strokeWidth={1} />
-        </button>
-
-      </div>
-
-      {/* Indicadores (Puntitos abajo) */}
-      <div className="flex gap-3 mt-12">
-        {devProjects.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => {
-              setDirection(idx > currentIndex ? 1 : -1);
-              setCurrentIndex(idx);
-            }}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              idx === currentIndex ? "w-8 bg-[#99aaff]" : "w-2 bg-white/20 hover:bg-white/40"
-            }`}
-          />
-        ))}
+          );
+        })}
       </div>
 
     </main>

@@ -1,21 +1,23 @@
 "use client";
 
 import { useState, MouseEvent } from "react";
-// Agregamos íconos de Enlace Externo y Cerrar
 import { ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useMagneticHover } from "@/hooks/useMagneticHover";
 
 interface ProjectCardProps {
   title: string;
   description: string;
   tags: string[];
   images: string[];
-  projectUrl?: string; // Nuevo: URL opcional al repositorio/proyecto
+  projectUrl?: string;
 }
 
 export default function ProjectCard({ title, description, tags, images, projectUrl }: ProjectCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { position, isHovering, ref, handleMouseMove, handleMouseLeave } = useMagneticHover(9);
 
   const nextImage = (e?: MouseEvent) => {
     e?.stopPropagation(); // Evita clics fantasma
@@ -42,20 +44,31 @@ export default function ProjectCard({ title, description, tags, images, projectU
 
   return (
     <>
-      {/* TARJETA BASE */}
+    {/* 1. EL SENSOR: Se queda quieto y mide el mouse de forma precisa */}
       <div 
-        onClick={handleCardClick}
-        // Agregamos hover:scale-[1.02], hover:shadow-2xl y duration-500
-        className={`flex flex-col gap-6 p-6 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md transition-all duration-500 hover:bg-white/7 hover:scale-[1.02] hover:shadow-2xl ${
-          projectUrl ? "cursor-pointer group/card" : ""
-        }`}
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="w-full h-full"
       >
-        
-        {/* Caja Multimedia */}
+    
+      {/* 2. EL MOTOR (LA TARJETA): Recibe las coordenadas y se mueve libremente */}
         <div 
-          onClick={handleMediaClick}
-          className="relative w-full h-64 rounded-2xl overflow-hidden group/media cursor-zoom-in"
+          onClick={handleCardClick}
+          // Asegúrate de que tenga "transition-all" para que el movimiento sea suave
+          className={`flex flex-col gap-4 p-5 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md transition-all ${
+            isHovering ? "duration-150 ease-out" : "duration-500 ease-out" 
+          } ${
+            projectUrl ? "cursor-pointer group/card" : ""
+          } shadow-[0_0_40px_rgba(153,170,255,0.2)] hover:shadow-[0_0_60px_rgba(153,170,255,0.4)]`}
+          style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
         >
+        
+        {/* CAJA MULTIMEDIA */}
+          <div 
+            onClick={handleMediaClick}
+            className="relative w-full h-48 md:h-52 rounded-2xl overflow-hidden group/media cursor-zoom-in"
+          >
           <div 
             className="w-full h-full transition-colors duration-500"
             style={{ backgroundColor: images[currentIndex] }}
@@ -86,7 +99,7 @@ export default function ProjectCard({ title, description, tags, images, projectU
               <ExternalLink size={20} className="text-gray-600 transition-colors group-hover/card:text-[#99aaff]" />
             )}
           </div>
-          <p className="text-gray-400 text-sm leading-relaxed mb-6">
+          <p className="text-gray-400 text-sm leading-relaxed mb-4">
             {description}
           </p>
           
@@ -97,6 +110,7 @@ export default function ProjectCard({ title, description, tags, images, projectU
               </span>
             ))}
           </div>
+        </div>
         </div>
       </div>
 
