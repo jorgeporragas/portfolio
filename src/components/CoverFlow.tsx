@@ -2,7 +2,7 @@
 
 import { useState, useRef, MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Headphones, Radio, PlayCircle } from "lucide-react";
+import { SpotifyIcon, AppleMusicIcon, TidalIcon } from "./BrandIcons";
 import { useMagneticHover } from "@/hooks/useMagneticHover";
 
 export interface AudioProject {
@@ -11,7 +11,7 @@ export interface AudioProject {
   artist: string;
   description: string;
   coverImage: string;
-  platformUrl?: string;
+  links?: { spotify?: string; apple?: string; tidal?: string }; // <-- Reemplazamos platformUrl
   tags: string[];
 }
 
@@ -38,11 +38,11 @@ function CoverItem({
     }
   };
 // Menu radial con enlaces a plataformas (solo para el proyecto activo)
-  const radialButtons = [
-    { id: 'spotify', icon: <Headphones size={20} />, x: -250, y: -110, delay: 0 },
-    { id: 'apple', icon: <Radio size={20} />, x: -310, y: 0, delay: 0.05 },
-    { id: 'tidal', icon: <PlayCircle size={20} />, x: -250, y: 110, delay: 0.1 },
-  ];
+  const availableButtons = [
+    { id: 'spotify', icon: <SpotifyIcon size={36} />, x: -210, y: -110, delay: 0, url: project.links?.spotify },
+    { id: 'apple', icon: <AppleMusicIcon size={36} />, x: -250, y: 0, delay: 0.05, url: project.links?.apple },
+    { id: 'tidal', icon: <TidalIcon size={36} />, x: -210, y: 110, delay: 0.1, url: project.links?.tidal },
+  ].filter(btn => btn.url !== undefined);
 
   return (
     <motion.div
@@ -64,10 +64,10 @@ function CoverItem({
       
       {/* EL MENÚ RADIAL (A la Izquierda) */}
       <AnimatePresence>
-        {isMenuOpen && isActive && radialButtons.map((btn) => (
+        {isMenuOpen && isActive && availableButtons.map((btn) => (
           <motion.a
             key={btn.id}
-            href={project.platformUrl || "#"}
+            href={btn.url}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()} 
@@ -78,9 +78,10 @@ function CoverItem({
               transition: { type: "spring", stiffness: 150, damping: 20 }
             }}
             transition={{ type: "spring", stiffness: 120, damping: 12, delay: btn.delay }}
-            whileHover={{ scale: 1.15 }} 
+            // Hacemos que crezca un poco más al hacer hover ya que no tiene fondo
+            whileHover={{ scale: 1.2 }} 
             whileTap={{ scale: 0.9 }}    
-            className="absolute z-[-1] w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xl hover:bg-[#99aaff]/20 hover:border-[#99aaff]/50 transition-colors cursor-pointer"
+            className="absolute z-[-1] text-white/70 hover:text-white drop-shadow-lg hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.8)] transition-colors cursor-pointer"
           >
             {btn.icon}
           </motion.a>
@@ -95,8 +96,7 @@ function CoverItem({
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             exit={{ opacity: 0, x: -20, filter: "blur(4px)", transition: { duration: 0.2 } }}
             transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
-            onClick={(e) => e.stopPropagation()} // Evita que hacer clic en el texto cierre el disco
-            // left-full lo empuja justo afuera del disco a la derecha
+            onClick={(e) => e.stopPropagation()}
             className="absolute left-full top-1/2 -translate-y-1/2 ml-8 md:ml-16 w-[280px] md:w-[350px] text-left cursor-default"
           >
             <h2 className="text-4xl font-medium text-white mb-2 leading-tight drop-shadow-md">
@@ -139,8 +139,15 @@ function CoverItem({
         style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
       >
         <div 
+          // 3. LA SOLUCIÓN DE LA IMAGEN: Usamos style puro para forzar la geometría
           className="w-full h-full flex items-center justify-center border border-white/10 transition-colors relative"
-          style={{ backgroundColor: project.coverImage }}
+          style={{ 
+            backgroundImage: project.coverImage.includes('url') ? project.coverImage : 'none',
+            backgroundColor: !project.coverImage.includes('url') ? project.coverImage : 'transparent',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
         >
           {!isActive && <div className="absolute inset-0 bg-black/40" />}
         </div>
