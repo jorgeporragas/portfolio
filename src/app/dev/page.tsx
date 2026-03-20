@@ -10,30 +10,16 @@ const devProjects = [
     title: "meedee",
     description: "A dedicated mobile application designed to streamline the management of music projects, sessions, and audio assets.",
     tags: ["Swift", "SwiftUI", "iOS"],
-    images: ["#1A1A1A", "#2C2C2E", "#3A3A3C"],
+    images: ["#1A1A1A"],
     projectUrl: "https://github.com/jorgeporragas/meedee"
   },
   {
-    id: "song-split",
-    title: "Song Split Manager",
-    description: "Freelance mobile solution for independent artists to calculate and manage credit splits, royalties, and track metadata effectively.",
-    tags: ["React Native", "TypeScript", "Mobile"],
-    images: ["#1E1B4B", "#312E81", "#4338CA"]
-  },
-  {
-    id: "game-engine",
-    title: "Custom Game Engine",
-    description: "Low-level architecture experiments building a custom game engine, focusing on memory management and high-performance rendering.",
-    tags: ["C++", "OpenGL", "Systems Architecture"],
-    images: ["#064E3B", "#065F46", "#047857"]
-  },
-  {
     id: "portfolio",
-    title: "Web Portfolio",
-    description: "Interactive, highly animated personal portfolio built with modern web technologies, focusing on physics-based UI and glassmorphism.",
-    tags: ["Next.js", "Tailwind CSS", "TypeScript"],
-    images: ["#3B0764", "#581C87", "#7E22CE"]
-  }
+    title: "Interactive Portfolio",
+    description: "A highly interactive, responsive personal website featuring a custom 3D CoverFlow engine, glassmorphism UI overlays, and complex fluid layouts.",
+    tags: ["Next.js", "React", "Framer Motion", "Tailwind CSS"],
+    images: ["#000000"],
+  },
 ];
 
 export default function DevPage() {
