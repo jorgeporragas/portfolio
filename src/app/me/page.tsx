@@ -45,13 +45,13 @@ export default function MePage() {
           className="flex-1 flex flex-col gap-[clamp(1rem,2.5vh,1.5rem)] text-gray-400 text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed font-light"
         >
           <p>
-            I'm Jorge, a 27-year-old software developer and producer based in Monterrey, Mexico. Currently in my 5th semester of Software Development, I balance my time between engineering robust digital products and exploring sonic landscapes.
+            I'm Jorge, a 27-year-old software developer and producer based in Monterrey, Mexico. I balance my time between engineering robust digital products and exploring sound.
           </p>
           <p>
-            My technical focus lies in low-level systems architecture using C++ and crafting fluid, native mobile experiences with Swift and SwiftUI.
+            My technical focus lies in low-level systems architecture using <strong>C++</strong>, crafting fluid web experiences with <strong>Next.js</strong> and <strong>React</strong>, as well as creating intuitive and responsive mobile apps using <strong>Swift</strong> and <strong>SwiftUI</strong>. I have a deep passion for optimizing performance and creating seamless user interfaces that feel good to use.
           </p>
           <p>
-            When I'm not optimizing code or upgrading the GPU on my custom rig, you can find me in Ableton Live designing heavy, atmospheric soundscapes. I believe the best engineering—just like the best mixing—requires extreme attention to detail and a deep understanding of the underlying signal flow.
+            When I'm not optimizing code or upgrading the GPU on my custom rig, you can find me crafting new tracks in <strong>Ableton Live</strong>. I believe the best engineering—just like the best mixing—requires extreme attention to detail and a deep understanding of the underlying signal flow.
           </p>
 
           {/* REDES Y CONTACTO (Íconos fluidos) */}

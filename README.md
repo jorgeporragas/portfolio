@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jorge Porragas - Interactive Developer Portfolio
 
-## Getting Started
+> A highly interactive, responsive personal website featuring a custom 3D CoverFlow engine, glassmorphism UI overlays, and complex fluid layouts.
 
-First, run the development server:
+[![Live Demo](https://img.shields.io/badge/Live-Demo-success?style=for-the-badge)](https://www.jorgeporragas.com)
 
+## 🧠 Architecture & Engineering
+
+This portfolio is not a static template. It was engineered from the ground up to showcase advanced frontend capabilities, specifically focusing on complex UI choreography, performance, and seamless responsive design without relying on heavy external carousel libraries.
+
+### Key Technical Achievements:
+
+* **Custom 3D CoverFlow Engine:** Built entirely with Framer Motion. Implements spring physics for drag gestures, dynamic 3D perspective (`translateZ`, `rotateY`), and offset-based index calculations.
+* **Decoupled "Sibling" Component Architecture:** To solve traditional bounding-box and layout shift issues during drag interactions, the visual layer (the 3D disk stage) and the interactive UI layer (Project Overlay) are completely decoupled. They communicate via shared state, allowing extreme Z-index manipulation and perfect tap-to-dismiss behavior.
+* **Mathematical Fluid Layouts:** Replaced rigid CSS Media Queries with native CSS `clamp()` and viewport units (`vw`, `vh`). This ensures the UI is mathematically proportional on any screen size, from my small iPhone SE to a crisp 4K desktop monitor.
+* **Premium Glassmorphism & Z-Depth:** Utilizes deep CSS pseudo-elements to create intense, dynamic "blur trails" behind UI controls, ensuring perfect text readability over any dynamic image background while maintaining a strict `z-index` stacking context.
+
+## 🛠 Tech Stack
+
+* **Framework:** Next.js (App Router)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **Animation Engine:** Framer Motion
+* **Deployment:** Vercel
+
+## 🚀 Local Development
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [https://github.com/jorgeporragas/portfolio.git](https://github.com/jorgeporragas/portfolio.git)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
+3. Run the deployment server:
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚖️ License & Copyright
+### © 2026 Jorge Porragas. All Rights Reserved.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This repository is public for portfolio and demonstration purposes only. The source code, design, and assets may not be copied, cloned, distributed, or used for any commercial or personal projects without explicit permission.
