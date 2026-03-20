@@ -3,10 +3,11 @@ import { Home } from "lucide-react";
 
 export default function Navbar() {
   return (
-    // Cambiamos 'left-1/2 -translate-x-1/2' por 'left-8 md:left-12'
-    <nav className="fixed top-12 left-8 md:left-12 z-50 flex items-center">
+    <nav className="fixed z-50 flex items-center top-[clamp(1.5rem,4vh,3rem)] left-[clamp(1.5rem,4vw,3rem)]">
       <GlowLink href="/">
-        <Home size={50} strokeWidth={1.5} />
+        <div className="w-[clamp(2.5rem,6vw,3.5rem)] h-[clamp(2.5rem,6vw,3.5rem)] flex items-center justify-center">
+          <Home size="100%" strokeWidth={1.5} />
+        </div>
       </GlowLink>
     </nav>
   );

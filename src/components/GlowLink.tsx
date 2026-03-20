@@ -38,7 +38,7 @@ export default function GlowLink({ href, children, label }: GlowLinkProps) {
       </div>
 
       {label && (
-        <span className="text-lg tracking-widest text-gray-500 group-hover:text-white transition-colors duration-300">
+        <span className="tracking-widest text-gray-500 group-hover:text-white transition-colors duration-300 text-[clamp(0.875rem,3vw,1.125rem)]">
           {label}
         </span>
       )}
