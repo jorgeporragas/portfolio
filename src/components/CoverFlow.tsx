@@ -82,7 +82,9 @@ function CoverItem({
           style={{ 
             backgroundImage: project.coverImage.includes('url') ? project.coverImage : 'none',
             backgroundColor: !project.coverImage.includes('url') ? project.coverImage : 'transparent',
-            backgroundSize: 'cover', backgroundPosition: 'center'
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat' // Evitar que la imagen se repita de forma extraña si es pequeña
           }}
         >
           {!isActive && <div className="absolute inset-0 bg-black/40" />}
@@ -124,7 +126,6 @@ function ProjectOverlay({
               href={btn.url}
               target="_blank"
               rel="noopener noreferrer"
-              // BLINDAJE: Si el usuario hace clic al botón, abre el link pero evita que el clic "traspase" y cierre el menú antes de tiempo.
               onClick={(e) => e.stopPropagation()} 
               className="absolute pointer-events-auto text-white/70 hover:text-white drop-shadow-2xl"
               initial={{ opacity: 0, y: -80, scale: 0.8 }}
@@ -145,8 +146,7 @@ function ProjectOverlay({
             initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: isMobile ? 120 : 100, x: 0 }}
             exit={{ opacity: 0, y: 80 }}
-            // CIERRE UNIVERSAL: Ahora tocar el texto también descarta el focus mode.
-            onClick={() => setIsMenuOpen(false)}
+            onClick={() => setIsMenuOpen(false)} // Cerrar al hacer click en el overlay
             className="absolute w-[95vw] md:w-[400px] text-center pointer-events-auto px-6 cursor-default"
           >
             <h2 className="text-4xl md:text-5xl font-medium text-white mb-2 leading-tight">
@@ -182,7 +182,6 @@ export default function CoverFlow({ projects }: { projects: AudioProject[] }) {
   return (
     <div className="w-full flex flex-col items-center justify-center relative min-h-[60vh]">
       
-      {/* El Backdrop oscuro (ya estaba configurado para cerrar el menú) */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
@@ -203,7 +202,6 @@ export default function CoverFlow({ projects }: { projects: AudioProject[] }) {
         ))}
       </div>
 
-      {/* Pasamos setIsMenuOpen para que el overlay pueda cerrar el menú */}
       <ProjectOverlay 
         project={projects[activeIndex]} 
         isMenuOpen={isMenuOpen} 

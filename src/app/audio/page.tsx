@@ -41,10 +41,9 @@ export default async function AudioPage() {
   );
 
   return (
-    // 1. PADDING Y MÁRGENES FLUIDOS (El escudo protector del Navbar)
     <main className="min-h-[100dvh] w-full flex flex-col items-center pt-[clamp(7rem,15vh,10rem)] pb-12 px-[clamp(1.5rem,4vw,3rem)] relative overflow-hidden">
       
-      {/* 1. EL TÍTULO: Lo bajamos de z-20 a z-10 */}
+      {/* TÍTULO*/}
       <div className="w-full max-w-5xl relative z-10 flex-shrink-0">
         <h1 className="font-light text-gray-400 tracking-widest mb-[clamp(0.5rem,2vh,1.5rem)] text-[clamp(2.5rem,6vw,4.5rem)] leading-none">
           / <span className="text-white font-medium">audio</span>
@@ -54,10 +53,9 @@ export default async function AudioPage() {
         </p>
       </div>
 
-      {/* 2. EL CONTENEDOR DEL CARRUSEL: Lo subimos de z-10 a z-30 */}
-      {/* Usamos z-30 para asegurarnos de que toda la "Capa 2" esté por encima del layout base */}
-      <div className="flex-1 w-full flex flex-col items-center justify-center relative z-30 max-w-5xl">
-        <CoverFlow projects={audioProjects} />
+      {/* EL CONTENEDOR DEL CARRUSEL */}
+      <div className="flex-1 w-full flex flex-col items-center justify-center relative z-30 max-w-5xl"> 
+        <CoverFlow projects={audioProjects} /> 
       </div>
 
     </main>
