@@ -1,0 +1,15 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .face {
+      stroke: #1E1E1E;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .face {
+        stroke: #FFFFFF;
+      }
+    }
+  </style>
+  
+  <path class="face" d="M170.667 297.333C170.667 297.333 202.667 338.667 256 338.667C309.333 338.667 341.333 297.333 341.333 297.333M192 194H192.213M320 194H320.213M469.333 256C469.333 370.139 373.821 462.667 256 462.667C138.179 462.667 42.6667 370.139 42.6667 256C42.6667 141.861 138.179 49.3333 256 49.3333C373.821 49.3333 469.333 141.861 469.333 256Z" stroke-width="56" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
