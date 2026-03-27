@@ -20,7 +20,7 @@ export interface AudioProject {
 // 1. EL DISCO (Perspectiva 3D)
 // --------------------------------------------------------
 function CoverItem({ 
-  project, index, activeIndex, setActiveIndex, isMenuOpen, setIsMenuOpen 
+  project, index, activeIndex, setActiveIndex, isMenuOpen, setIsMenuOpen, totalItems 
 }: { 
   project: AudioProject; 
   index: number; 
@@ -28,6 +28,7 @@ function CoverItem({
   setActiveIndex: (idx: number) => void;
   isMenuOpen: boolean; 
   setIsMenuOpen: (val: boolean) => void;
+  totalItems: number; // NUEVO: Recibimos el total de proyectos
 }) {
   const { position, ref, handleMouseMove, handleMouseLeave } = useMagneticHover(9);
   const isMobile = useIsMobile();
@@ -52,7 +53,8 @@ function CoverItem({
       dragElastic={0.5}
       onDragEnd={(e, { offset }) => {
         const threshold = 30;
-        if (offset.x < -threshold && activeIndex < 10) setActiveIndex(activeIndex + 1);
+        // CORRECCIÓN: Ahora el límite es dinámico (totalItems - 1) en lugar del 10 hardcodeado
+        if (offset.x < -threshold && activeIndex < totalItems - 1) setActiveIndex(activeIndex + 1);
         else if (offset.x > threshold && activeIndex > 0) setActiveIndex(activeIndex - 1);
         setIsMenuOpen(false);
       }}
@@ -108,6 +110,9 @@ function ProjectOverlay({
 }) {
   const isMobile = useIsMobile();
   
+  // CORRECCIÓN DEFENSIVA: Si por alguna razón el proyecto no existe, no intentamos renderizar nada.
+  if (!project) return null;
+
   const buttons = [
     { id: 'spotify', icon: <SpotifyIcon size={isMobile ? 48 : 42} />, x: -120, y: -145, mobileX: -90, mobileY: -135, url: project.links?.spotify },
     { id: 'apple', icon: <AppleMusicIcon size={isMobile ? 64 : 58} />, x: 0, y: -145, mobileX: 0, mobileY: -135, url: project.links?.apple },
@@ -198,6 +203,7 @@ export default function CoverFlow({ projects }: { projects: AudioProject[] }) {
             key={p.id} project={p} index={i} 
             activeIndex={activeIndex} setActiveIndex={setActiveIndex} 
             isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} 
+            totalItems={projects.length} // NUEVO: Pasamos la cantidad total de discos aquí
           />
         ))}
       </div>
