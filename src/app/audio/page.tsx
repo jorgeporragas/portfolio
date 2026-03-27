@@ -25,6 +25,28 @@ const projectSources = [
     description: "A short double feature of two of my tracks, 'luz' and 'nada'. Written, produced, mixed and mastered by myself. Additional production by Alfredo Savoy.",
     tags: ["Ableton Live", "Vocals", "Production", "Mixing", "Mastering"]
   },
+  {
+    id: "3",
+    links: {
+      spotify: "https://open.spotify.com/intl-es/album/23hyIItO7jnyJsSvbovFW8?si=UglykhTaSa24ruRccqY3xw",
+      apple: "https://music.apple.com/mx/album/chicle-y-mora-ep/1757468172",
+      tidal: "https://tidal.com/album/375296440/u"
+    },
+    artist: "Aguadulce",
+    description: "I had the pleasure of working on the production alongside close friend and talented musician Alfredo Savoy. A blend of pop, rock and electronic music, this EP was a fun project to work on.",
+    tags: ["Ableton Live", "Production", "Mixing", "Mastering"]
+  },
+  {
+    id: "4",
+    links: {
+      spotify: "https://open.spotify.com/intl-es/album/3YJVMJ9unabj9f0GNPmlSW?si=QkGjB3JbTo6hnYqIWKLnDQ",
+      apple: "https://music.apple.com/mx/album/we-need-a-title/1596193684",
+      tidal: "https://tidal.com/album/205643101/u"
+    },
+    artist: "Shark Camp",
+    description: "The first and only EP by Shark Camp. I produced this project with the help of my friends and bandmates, Alfredo Savoy, Marcelo Villanueva, Ángel Gomez and Kevin Josh. A blendo of pop, hip hop and electronic music that originally was only meant to be Angel's audio engineering thesis project.",
+    tags: ["Ableton Live","Songwriting", "Vocals", "Production", "Mixing", "Mastering"]
+  }
 ];
 
 export default async function AudioPage() {

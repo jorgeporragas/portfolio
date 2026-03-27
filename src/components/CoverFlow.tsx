@@ -84,7 +84,7 @@ function CoverItem({
             backgroundColor: !project.coverImage.includes('url') ? project.coverImage : 'transparent',
             backgroundSize: 'cover', 
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat' // Evitar que la imagen se repita de forma extraña si es pequeña
+            backgroundRepeat: 'no-repeat'
           }}
         >
           {!isActive && <div className="absolute inset-0 bg-black/40" />}
@@ -108,46 +108,48 @@ function ProjectOverlay({
 }) {
   const isMobile = useIsMobile();
   
+  // MODIFICACIÓN: Bajamos los botones ligeramente (y: -145, mobileY: -135)
   const buttons = [
-    { id: 'spotify', icon: <SpotifyIcon size={isMobile ? 48 : 42} />, x: -120, y: -140, mobileX: -90, mobileY: -120, url: project.links?.spotify },
-    { id: 'apple', icon: <AppleMusicIcon size={isMobile ? 64 : 58} />, x: 0, y: -140, mobileX: 0, mobileY: -125, url: project.links?.apple },
-    { id: 'tidal', icon: <TidalIcon size={isMobile ? 72 : 64} />, x: 120, y: -140, mobileX: 90, mobileY: -120, url: project.links?.tidal },
+    { id: 'spotify', icon: <SpotifyIcon size={isMobile ? 48 : 42} />, x: -120, y: -145, mobileX: -90, mobileY: -135, url: project.links?.spotify },
+    { id: 'apple', icon: <AppleMusicIcon size={isMobile ? 64 : 58} />, x: 0, y: -145, mobileX: 0, mobileY: -135, url: project.links?.apple },
+    { id: 'tidal', icon: <TidalIcon size={isMobile ? 72 : 64} />, x: 120, y: -145, mobileX: 90, mobileY: -135, url: project.links?.tidal },
   ].filter(b => b.url);
 
   return (
     <AnimatePresence>
       {isMenuOpen && (
-        <div className="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center">
+        <div className="fixed inset-0 pointer-events-none z-[100]">
           
-          {/* BOTONES */}
-          {buttons.map((btn, i) => (
-            <motion.a
-              key={btn.id}
-              href={btn.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()} 
-              className="absolute pointer-events-auto text-white/70 hover:text-white drop-shadow-2xl"
-              initial={{ opacity: 0, y: -80, scale: 0.8 }}
-              animate={{ 
-                opacity: 1, scale: 1, 
-                x: isMobile ? btn.mobileX : btn.x, 
-                y: isMobile ? btn.mobileY : btn.y 
-              }}
-              exit={{ opacity: 0, scale: 0.8, y: -80 }}
-              transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.05 }}
-            >
-              {btn.icon}
-            </motion.a>
-          ))}
+          <div className="absolute inset-0 flex items-center justify-center">
+            {buttons.map((btn, i) => (
+              <motion.a
+                key={btn.id}
+                href={btn.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()} 
+                className="absolute pointer-events-auto text-white/70 hover:text-white drop-shadow-2xl"
+                initial={{ opacity: 0, y: -80, scale: 0.8 }}
+                animate={{ 
+                  opacity: 1, scale: 1, 
+                  x: isMobile ? btn.mobileX : btn.x, 
+                  y: isMobile ? btn.mobileY : btn.y 
+                }}
+                exit={{ opacity: 0, scale: 0.8, y: -80 }}
+                transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.05 }}
+              >
+                {btn.icon}
+              </motion.a>
+            ))}
+          </div>
 
-          {/* INFORMACIÓN */}
           <motion.div
-            initial={{ opacity: 0, y: 80 }}
-            animate={{ opacity: 1, y: isMobile ? 120 : 100, x: 0 }}
-            exit={{ opacity: 0, y: 80 }}
-            onClick={() => setIsMenuOpen(false)} // Cerrar al hacer click en el overlay
-            className="absolute w-[95vw] md:w-[400px] text-center pointer-events-auto px-6 cursor-default"
+            initial={{ opacity: 0, y: 40, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={{ opacity: 0, y: 40, x: "-50%" }}
+            onClick={() => setIsMenuOpen(false)} 
+            // MODIFICACIÓN: Subimos el texto un poco más (top-[49%] en móvil, top-[46%] en escritorio)
+            className="absolute top-[49%] md:top-[46%] left-1/2 w-[95vw] md:w-[400px] max-h-[40vh] overflow-y-auto text-center pointer-events-auto px-6 cursor-default pb-12 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)]"
           >
             <h2 className="text-4xl md:text-5xl font-medium text-white mb-2 leading-tight">
               {project.title}
