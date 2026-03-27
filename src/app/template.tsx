@@ -8,9 +8,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ 
-        type: "spring", // Cambiamos a físicas reales
-        stiffness: 280, // La "tensión" del resorte (más alto = más rápido)
-        damping: 10     // La "fricción" (más bajo = más rebote al llegar)
+        type: "spring", // Tipo de física
+        stiffness: 280, // Tensión
+        damping: 10     // Fricción
       }}
     >
       {children}

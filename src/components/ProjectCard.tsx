@@ -10,7 +10,7 @@ interface ProjectCardProps {
   tags: string[];
   images: string[];
   projectUrl?: string;
-  onOpenMedia: () => void; // Nueva función para avisarle a la página que abra el modal
+  onOpenMedia: () => void;
 }
 
 export default function ProjectCard({ title, description, tags, images, projectUrl, onOpenMedia }: ProjectCardProps) {
@@ -27,8 +27,10 @@ export default function ProjectCard({ title, description, tags, images, projectU
     onOpenMedia();
   };
 
-  // Determinar si es un color hex o una URL para la miniatura
-  const coverIsColor = images[0]?.startsWith('#');
+  // Validamos si hay imágenes en el arreglo
+  const hasMedia = images && images.length > 0;
+  // Determinar si es un color hex o una URL para la miniatura (solo si hay media)
+  const coverIsColor = hasMedia ? images[0]?.startsWith('#') : false;
 
   return (
     <div 
@@ -47,24 +49,25 @@ export default function ProjectCard({ title, description, tags, images, projectU
         style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
       >
         
-        {/* CAJA MULTIMEDIA (MINIATURA LIMPIA) */}
-        <div 
-          onClick={handleMediaClick}
-          className="relative w-full h-48 md:h-52 rounded-2xl overflow-hidden group/media cursor-zoom-in border border-white/5"
-        >
-          {coverIsColor ? (
-            <div className="w-full h-full transition-transform duration-700 group-hover/media:scale-105" style={{ backgroundColor: images[0] }} />
-          ) : (
-            <img src={images[0]} alt={title} className="w-full h-full object-cover transition-transform duration-700 group-hover/media:scale-105" />
-          )}
-          
-          {/* Overlay sutil para indicar que se puede abrir */}
-          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover/media:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
-            <div className="bg-black/50 p-3 rounded-full text-white/90">
-              <Maximize2 size={24} />
+        {/* CAJA MULTIMEDIA */}
+        {hasMedia && (
+          <div 
+            onClick={handleMediaClick}
+            className="relative w-full h-48 md:h-52 rounded-2xl overflow-hidden group/media cursor-zoom-in border border-white/5 shrink-0"
+          >
+            {coverIsColor ? (
+              <div className="w-full h-full transition-transform duration-700 group-hover/media:scale-105" style={{ backgroundColor: images[0] }} />
+            ) : (
+              <img src={images[0]} alt={title} className="w-full h-full object-cover transition-transform duration-700 group-hover/media:scale-105" />
+            )}
+            
+            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover/media:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+              <div className="bg-black/50 p-3 rounded-full text-white/90">
+                <Maximize2 size={24} />
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* INFORMACIÓN */}
         <div>

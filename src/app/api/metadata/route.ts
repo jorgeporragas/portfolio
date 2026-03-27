@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import * as cheerio from "cheerio";
 
 export async function GET(request: Request) {
-  // 1. Extraemos el URL que nos manda el frontend desde los parámetros de búsqueda
+  // 1. Extraemos el URL 
   const { searchParams } = new URL(request.url);
   const targetUrl = searchParams.get("url");
 
@@ -15,7 +15,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    // 2. Hacemos la petición HTTP a Spotify, Apple Music, o la página que sea
+    // 2. Hacemos la petición HTTP 
     const response = await fetch(targetUrl, {
       // Fingimos ser un navegador normal para que las plataformas no bloqueen la petición
       headers: {
@@ -33,8 +33,8 @@ export async function GET(request: Request) {
     // 4. Cargamos el HTML en Cheerio para poder manipularlo como si fuera jQuery
     const $ = cheerio.load(html);
 
-    // 5. Extraemos la "carnita" (Open Graph tags)
-    // Buscamos <meta property="og:title" content="...">
+    // 5. Extraemos Open Graph tags
+
     const title = $('meta[property="og:title"]').attr("content") || $("title").text() || "Sin título";
     const description = $('meta[property="og:description"]').attr("content") || "";
     const image = $('meta[property="og:image"]').attr("content") || "";
@@ -53,7 +53,7 @@ export async function GET(request: Request) {
       artist = parts[1].trim();
     }
 
-    // 6. Devolvemos el objeto estructurado listo para que el frontend lo consuma
+    // 6. Devolvemos el objeto estructurado
     return NextResponse.json({
       success: true,
       data: {

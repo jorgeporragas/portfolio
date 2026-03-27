@@ -4,14 +4,15 @@ import { useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { p } from "framer-motion/client";
 
 const devProjects = [
   {
     id: "meedee",
     title: "meedee",
     description: "A dedicated mobile application designed to streamline the management of music projects, sessions, and audio assets.",
-    tags: ["Swift", "SwiftUI", "iOS"],
-    images: ["#1A1A1A", "#2C2C2E", "#3A3A3C"], // Agregué un par de colores más para probar la galería
+    tags: ["Figma","Swift", "SwiftUI", "iOS"],
+    images: ["/images/projects/meedee.png"], 
     projectUrl: "https://github.com/jorgeporragas/meedee"
   },
   {
@@ -19,7 +20,8 @@ const devProjects = [
     title: "Interactive Portfolio",
     description: "A highly interactive, responsive personal website featuring a custom 3D CoverFlow engine, glassmorphism UI overlays, and complex fluid layouts.",
     tags: ["Next.js", "React", "Framer Motion", "Tailwind CSS"],
-    images: ["#000000", "#111111"],
+    images: ["/images/projects/portfolio.png"],
+    projectUrl: "https://github.com/jorgeporragas/portfolio"
   },
 ];
 
@@ -36,7 +38,6 @@ function Lightbox({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // NUEVO: Controla la dirección de la animación
 
-  // NUEVO: Función unificada para paginar con dirección
   const paginate = (newDirection: number, e?: React.MouseEvent) => {
     e?.stopPropagation();
     setDirection(newDirection);
@@ -51,7 +52,6 @@ function Lightbox({
   const currentMedia = project.images[currentIndex];
   const isColor = currentMedia?.startsWith('#');
 
-  // NUEVO: Variantes de animación para el deslizamiento
   const slideVariants = {
     enter: (dir: number) => ({
       x: dir > 0 ? 500 : -500,
@@ -84,12 +84,12 @@ function Lightbox({
         <X size={32} strokeWidth={1.5} />
       </button>
 
-      {/* Contenedor principal (overflow-hidden es vital para que las animaciones no creen scroll horizontal) */}
+      {/* Contenedor principal */}
       <div 
         onClick={(e) => e.stopPropagation()} 
         className="relative w-full max-w-5xl h-[70vh] md:h-[80vh] flex items-center justify-center group overflow-hidden"
       >
-        {/* LA MAGIA: AnimatePresence permite animar la salida de la imagen anterior */}
+        {/* AnimatePresence permite animar la salida de la imagen anterior */}
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}
@@ -99,7 +99,7 @@ function Lightbox({
             animate="center"
             exit="exit"
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            // FÍSICAS DE SWIPE (Igual que en tu CoverFlow)
+            // FÍSICAS DE SWIPE 
             drag={project.images.length > 1 ? "x" : false}
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={1}
@@ -116,7 +116,7 @@ function Lightbox({
               <img 
                 src={currentMedia} 
                 alt={`${project.title} screenshot ${currentIndex + 1}`} 
-                // TRUCO PRO: draggable={false} evita que el navegador intente "arrastrar para guardar" la imagen nativamente, arruinando el swipe de Framer Motion.
+                // draggable={false} evita que el navegador intente "arrastrar para guardar" la imagen nativamente, arruinando el swipe de Framer Motion.
                 draggable={false}
                 className="max-w-full max-h-full object-contain rounded-xl drop-shadow-2xl" 
               />
@@ -124,7 +124,7 @@ function Lightbox({
           </motion.div>
         </AnimatePresence>
 
-        {/* Controles de Navegación (Ratón) */}
+        {/* Controles de Navegación */}
         {project.images.length > 1 && (
           <>
             <button onClick={(e) => paginate(-1, e)} className="absolute left-4 md:-left-12 top-1/2 -translate-y-1/2 p-3 md:p-4 rounded-full bg-black/50 text-white hover:bg-black/80 hover:scale-110 backdrop-blur-md transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 z-10">
@@ -137,7 +137,7 @@ function Lightbox({
         )}
       </div>
 
-      {/* Indicadores (Puntitos) */}
+      {/* Indicadores */}
       {project.images.length > 1 && (
         <div className="absolute bottom-8 flex gap-3 z-10">
           {project.images.map((_, idx) => (

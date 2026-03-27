@@ -108,7 +108,6 @@ function ProjectOverlay({
 }) {
   const isMobile = useIsMobile();
   
-  // MODIFICACIÓN: Bajamos los botones ligeramente (y: -145, mobileY: -135)
   const buttons = [
     { id: 'spotify', icon: <SpotifyIcon size={isMobile ? 48 : 42} />, x: -120, y: -145, mobileX: -90, mobileY: -135, url: project.links?.spotify },
     { id: 'apple', icon: <AppleMusicIcon size={isMobile ? 64 : 58} />, x: 0, y: -145, mobileX: 0, mobileY: -135, url: project.links?.apple },
@@ -148,7 +147,6 @@ function ProjectOverlay({
             animate={{ opacity: 1, y: 0, x: "-50%" }}
             exit={{ opacity: 0, y: 40, x: "-50%" }}
             onClick={() => setIsMenuOpen(false)} 
-            // MODIFICACIÓN: Subimos el texto un poco más (top-[49%] en móvil, top-[46%] en escritorio)
             className="absolute top-[49%] md:top-[46%] left-1/2 w-[95vw] md:w-[400px] max-h-[40vh] overflow-y-auto text-center pointer-events-auto px-6 cursor-default pb-12 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] [-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)]"
           >
             <h2 className="text-4xl md:text-5xl font-medium text-white mb-2 leading-tight">

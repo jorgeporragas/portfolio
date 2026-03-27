@@ -12,10 +12,32 @@ const projectSources = [
     },
     artist: "CLUBZ",
     description: "CLUBZ's latest record. I had the pleasure of working on the production, crafting vocal melodies and lyrics, as well as providing background vocals for the entire project.",
-    tags: ["Songwriting", "Vocals", "Production"]
+    tags: ["Ableton Live","Songwriting", "Vocals", "Production"]
   },
   {
     id: "2",
+    links: {
+      spotify: "https://open.spotify.com/intl-es/track/6VB4dDfp7BRrvhvMbJW06k?si=c0bbad0f6e294474",
+      apple: "https://music.apple.com/mx/album/hesperia/1715034315?i=1715034695",
+      tidal: "https://tidal.com/track/281907910/u"
+    },
+    artist: "Noah Pino Palo",
+    description: "I originally made this track with my friend Mauricio Jasso as an experiment in production and songwriting. The end result was too good and it ended up being released as a single by his band Noah Pino Palo. I produced, recorded background vocals and mixed this track.  ",
+    tags: ["Ableton Live","Songwriting", "Vocals", "Production", "Mixing"]
+  },
+  {
+    id: "3",
+    links: {
+      spotify: "https://open.spotify.com/intl-es/album/3YJVMJ9unabj9f0GNPmlSW?si=QkGjB3JbTo6hnYqIWKLnDQ",
+      apple: "https://music.apple.com/mx/album/we-need-a-title/1596193684",
+      tidal: "https://tidal.com/album/205643101/u"
+    },
+    artist: "Shark Camp",
+    description: "The first and only EP by Shark Camp. I produced this project with the help of my friends and bandmates, Alfredo Savoy, Marcelo Villanueva, Ángel Gomez and Kevin Josh. A blend of pop, hip hop and electronic music that originally was only meant to be Angel's audio engineering thesis project.",
+    tags: ["Ableton Live","Songwriting", "Vocals", "Production", "Mixing", "Mastering"]
+  },
+  {
+    id: "4",
     links: {
       spotify: "https://open.spotify.com/intl-es/album/2G7Ve0EImgcNoxa9v6DxnH?si=4k9mZGhaS9mHhhZUeoDfmA",
       apple: "https://music.apple.com/mx/album/luz-nada-single/1820040774",
@@ -26,7 +48,7 @@ const projectSources = [
     tags: ["Ableton Live", "Vocals", "Production", "Mixing", "Mastering"]
   },
   {
-    id: "3",
+    id: "5",
     links: {
       spotify: "https://open.spotify.com/intl-es/album/23hyIItO7jnyJsSvbovFW8?si=UglykhTaSa24ruRccqY3xw",
       apple: "https://music.apple.com/mx/album/chicle-y-mora-ep/1757468172",
@@ -35,17 +57,6 @@ const projectSources = [
     artist: "Aguadulce",
     description: "I had the pleasure of working on the production alongside close friend and talented musician Alfredo Savoy. A blend of pop, rock and electronic music, this EP was a fun project to work on.",
     tags: ["Ableton Live", "Production", "Mixing", "Mastering"]
-  },
-  {
-    id: "4",
-    links: {
-      spotify: "https://open.spotify.com/intl-es/album/3YJVMJ9unabj9f0GNPmlSW?si=QkGjB3JbTo6hnYqIWKLnDQ",
-      apple: "https://music.apple.com/mx/album/we-need-a-title/1596193684",
-      tidal: "https://tidal.com/album/205643101/u"
-    },
-    artist: "Shark Camp",
-    description: "The first and only EP by Shark Camp. I produced this project with the help of my friends and bandmates, Alfredo Savoy, Marcelo Villanueva, Ángel Gomez and Kevin Josh. A blendo of pop, hip hop and electronic music that originally was only meant to be Angel's audio engineering thesis project.",
-    tags: ["Ableton Live","Songwriting", "Vocals", "Production", "Mixing", "Mastering"]
   }
 ];
 

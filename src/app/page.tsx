@@ -9,12 +9,12 @@ export default function Home() {
       {/* TÍTULO Y DESCRIPCIÓN */}
       <div className="text-center z-10 mb-[clamp(4.5rem,15vw,9rem)] relative">
         
-        {/* TÍTULO (JORGE PORRAGAS) */}
+        {/* TÍTULO */}
         <h1 className="text-white font-medium tracking-tight text-[clamp(3.75rem,9vw,6rem)] leading-none">
           jorge porragas
         </h1>
 
-        {/* DESCRIPCIÓN (developer & producer) */}
+        {/* DESCRIPCIÓN */}
         <p className="text-gray-500 font-light mt-[clamp(0.75rem,3vw,1.5rem)] text-[clamp(1.7rem,4vw,2.25rem)] tracking-wide">
           developer & producer
         </p>

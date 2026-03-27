@@ -1,7 +1,6 @@
 import * as cheerio from "cheerio";
 import { AudioProject } from "@/components/CoverFlow";
 
-// 1. Ahora recibimos un objeto de 'links' en lugar de un solo 'url'
 export async function getMetadata(
   links: { spotify?: string; apple?: string; tidal?: string }, 
   id: string, 
@@ -9,7 +8,6 @@ export async function getMetadata(
   customDescription: string, 
   tags: string[]
 ): Promise<AudioProject> {
-  // Usamos el primer link disponible para ir a robar la foto y el título
   const primaryUrl = links.spotify || links.apple || links.tidal;
 
   if (!primaryUrl) {
