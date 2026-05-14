@@ -4,7 +4,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-success?style=for-the-badge)](https://www.jorgeporragas.com)
 
-## 🧠 Architecture & Engineering
+## Architecture & Engineering
 
 This portfolio is not a static template. It was engineered from the ground up to showcase advanced frontend capabilities, specifically focusing on complex UI choreography, performance, and seamless responsive design without relying on heavy external carousel libraries.
 
@@ -15,7 +15,7 @@ This portfolio is not a static template. It was engineered from the ground up to
 * **Mathematical Fluid Layouts:** Replaced rigid CSS Media Queries with native CSS `clamp()` and viewport units (`vw`, `vh`). This ensures the UI is mathematically proportional on any screen size, from my small iPhone SE to a crisp 4K desktop monitor.
 * **Premium Glassmorphism & Z-Depth:** Utilizes deep CSS pseudo-elements to create intense, dynamic "blur trails" behind UI controls, ensuring perfect text readability over any dynamic image background while maintaining a strict `z-index` stacking context.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 * **Framework:** Next.js (App Router)
 * **Language:** TypeScript
@@ -23,7 +23,7 @@ This portfolio is not a static template. It was engineered from the ground up to
 * **Animation Engine:** Framer Motion
 * **Deployment:** Vercel
 
-## 🚀 Local Development
+## Local Development
 
 1. Clone the repository:
 ```bash
@@ -39,7 +39,7 @@ npm install
 npm run dev
 ```
 
-## ⚖️ License & Copyright
+## License & Copyright
 ### © 2026 Jorge Porragas. All Rights Reserved.
 
 This repository is public for portfolio and demonstration purposes only. The source code, design, and assets may not be copied, cloned, distributed, or used for any commercial or personal projects without explicit permission.
