@@ -58,7 +58,7 @@ export default function MePage() {
               </div>
             </GlowLink>
             
-            <GlowLink href="mailto:hello@jorgeporragas.com">
+            <GlowLink href="mailto:hola@jorgeporragas.com">
               <div className="w-[clamp(1.75rem,3vw,2.25rem)] h-[clamp(1.75rem,3vw,2.25rem)] flex items-center justify-center">
                 <Mail size="100%" />
               </div>
