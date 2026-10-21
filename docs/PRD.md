@@ -11,7 +11,7 @@ conversation. They are not filling a fixed role: they are judging whether his ta
 the team, across sound, software, or the work where the two meet.
 
 **Also served, with the same care:** artists and labels hiring a producer or engineer, agencies
-hiring for advertising audio, people evaluating his development work, and readers of his essays.
+hiring for advertising audio, people evaluating his development work, and readers of his blog.
 The primary user decides what comes first on the home page, not which sections get the care.
 
 What they do today without the site: read a CV, a LinkedIn profile and a Spotify link, separately.
@@ -44,11 +44,11 @@ summary, Jorge's roles, its artefacts, its links, and a body that tells the deci
 | **Release** | Work | Artist, format (single, EP, album), cover, playback |
 | **Ad** | Work | Brand, agency, the spot itself (audio or video), playback |
 | **Project** | Work | Stack, repository, status, screens |
-| **Essay** | — | Title, date, body; may reference the works it discusses |
+| **Post** | — | A blog entry of any kind: title, date, body; may reference the works it discusses |
 | **Credit** | — | One person in one role on one work. Jorge's roles are credits that name him |
 | **Link** | — | One platform and URL where a work also lives |
 
-- A work has many credits and many links; an essay references zero or more works.
+- A work has many credits and many links; a post references zero or more works.
 - **Playback** is a property of each release or ad: `player` (Jorge's own player, hosted media),
   `embed` (the platform's player, loaded on click) or `links` (platform links only).
 - **Slim** is Jorge's artist name. Slim's releases are releases like any other, credited to Slim
@@ -80,7 +80,7 @@ components, and the site should show the standard stack.
 | `/audio/advertising`, `/audio/advertising/[slug]` | Ads |
 | `/dev`, `/dev/[slug]` | Development projects (case studies) |
 | `/me` | About |
-| `/writing`, `/writing/[slug]` | Essays, reached from Me |
+| `/blog`, `/blog/[slug]` | Blog posts, reached from Me |
 
 Today's URLs (`/`, `/audio`, `/dev`, `/me`) keep working without redirects.
 
@@ -93,7 +93,7 @@ Today's URLs (`/`, `/audio`, `/dev`, `/me`) keep working without redirects.
 - Light and dark modes, both designed, following the visitor's system setting.
 - Each section has its own atmosphere: Me sage, Audio magenta, Development teal (design system
   D-017).
-- An RSS feed for the writing, a social preview image for every page, and a designed 404 page.
+- An RSS feed for the blog, a social preview image for every page, and a designed 404 page.
 - CI on every pull request: FLOW's checks, lint, type-check, build, link check, Lighthouse budgets
   (performance, accessibility, best practices, SEO) and an automated accessibility scan. The
   thresholds live in the CI configuration.
@@ -102,7 +102,7 @@ Today's URLs (`/`, `/audio`, `/dev`, `/me`) keep working without redirects.
 
 - Every release and ad whose hosting rights Jorge has confirmed, piece by piece.
 - Three or four development case studies, sticky.md among them.
-- The About text and one or two essays.
+- The About text and one or two blog posts.
 - Client work appears only with the client's agreement.
 
 ## Permanent vetoes
@@ -126,7 +126,7 @@ Each phase is a GitHub milestone with the same name.
    hand-drawn masters of the three marks.
 3. **Content.** Inventory and write everything listed under *Content at launch*.
 4. **Design.** Wireframes on one grid in grey, then high fidelity in both modes for each page type:
-   home, section index, release, ad, case study, essay.
+   home, section index, release, ad, case study, blog post.
 5. **Build.** Tokens, shared components, pages, content, player and motion.
 6. **Launch.** CI budgets green, accessibility pass, rights confirmed, then the new site replaces
    the old one.
