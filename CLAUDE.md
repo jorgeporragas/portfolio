@@ -6,8 +6,8 @@ the site is: [docs/PRD.md](docs/PRD.md). How it looks: [docs/DESIGN.md](docs/DES
 ## Commands
 
 - Install with `npm ci`. Run locally with `npm run dev`.
-- Before opening a pull request, run `npm run lint`, `npm run typecheck` and `npm run build`.
-  CI runs the same three; a red one is fixed, not skipped.
+- Before opening a pull request, run `npm run lint`, `npm run typecheck`, `npm test` and
+  `npm run build`. CI runs the same four; a red one is fixed, not skipped.
 - Jorge's shell is PowerShell on Windows. Give commands that work there.
 
 ## Next.js
@@ -22,6 +22,23 @@ the site is: [docs/PRD.md](docs/PRD.md). How it looks: [docs/DESIGN.md](docs/DES
 - No API routes or other server functions without an ADR. A public function is attack surface
   and spends the hosting quota.
 - Images go through `next/image`.
+
+## Content
+
+- Each release, ad, project and post is one file, `content/<collection>/<slug>.mdx`, with YAML
+  frontmatter. The file name is the URL slug: lowercase words joined by hyphens.
+- The frontmatter's shape is `src/content/schema.ts`; change the schema there, never work around
+  it in a page. Images a file names live under `public/`.
+- Read content only through `loadContent()` in `src/content/load.ts`, which validates it.
+- Never write placeholder content to make a page look finished (PRD veto 5).
+
+## Tests
+
+- Vitest, run with `npm test`. Tests sit next to the code as `*.test.ts`.
+- Test logic: parsing, validation, anything that can be wrong without looking wrong. Visual
+  quality is checked on the preview, not in unit tests.
+- A new test is seen to fail before it is trusted: break the code it guards, watch it go red,
+  restore.
 
 ## TypeScript
 
