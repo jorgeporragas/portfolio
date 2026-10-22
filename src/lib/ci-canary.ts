@@ -1,3 +1,2 @@
-// Deliberately broken to prove CI fails. Reverted in the next commit.
-export const canary: number = "not a number"; // type error
-export function untyped(x: any) { return x; } // lint error: no-explicit-any
+// Deliberately broken to prove the type-check step fails on its own. Removed in the next commit.
+export const canary: number = "not a number";

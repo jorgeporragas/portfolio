@@ -52,4 +52,3 @@ the site is: [docs/PRD.md](docs/PRD.md). How it looks: [docs/DESIGN.md](docs/DES
 
 - Branches: `type/short-description` (`fix/contact-address`). Commits and pull request titles
   follow Conventional Commits. The body says why.
-Broken on purpose: [missing](docs/NOPE.md).
