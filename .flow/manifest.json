@@ -1,0 +1,13 @@
+{
+  "files": {
+    ".claude/rules/flow.md": "a7fc2232cbbbda2ce0a3309a68c1d29dab7361da76ec3d7a0d21260380ba47e6",
+    ".claude/skills/flow-start/SKILL.md": "dca4f140d1e3fca809448afda71fb23411aed38ce5d0f610c84eef3d62ea4ef7",
+    ".flow/PATTERNS.md": "f3a589851979945023fcf1b51959dcf1db342f186b1816fab8f934a5a5318920",
+    ".flow/SETUP.md": "3e205acfd7cd92368d64fff76db43f7c01789e865d4b867e68bbb57eeae5ce3e",
+    ".flow/SPEC.md": "b69de7a0b43d99459e747d8ce82e5684ee5131789ccbd57a87ba9601a7f2de82",
+    ".flow/flow_check.py": "0450d969bdf6fad201cfa17fe156046ae7d7af47a65cd82b4c2eb390bb29815f",
+    ".githooks/pre-commit": "3becbe9a65609a26a9b74e6457c3d175dcd2f00619566b17149e3ffc8c2f52a0"
+  },
+  "source": "4fddbd3",
+  "version": "4.0.0."
+}

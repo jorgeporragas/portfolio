@@ -1,0 +1,36 @@
+# FLOW configuration for this project. flow_sync creates this file once and never overwrites
+# it: everything here belongs to the project (D-005). Every key is optional; anything omitted
+# takes FLOW's default. Definitions of every check: .flow/SPEC.md.
+# Raising a limit or switching a check off is the founder's call; say why in the pull request.
+
+# Where the component files and ADRs live, if not the defaults.
+# [files]
+# components_dir = "docs/components"
+# adr_dir = "docs/adr"
+
+# Limit per component file (C3).
+# [component_files]
+# max_words = 400
+
+# Per-file entry limits (C3). One block per file.
+[[entries]]
+file = "docs/FIXES.md"
+heading_level = 2
+max_words = 600
+
+# Section references inside code comments (C5).
+[references]
+code_globs = ["src/**/*.ts", "src/**/*.tsx"]
+
+# The component inventory (C7): every file in dir has a file in doc or is named in it.
+# Not configured yet: the components in src/components/ predate the design system and are
+# replaced in the Build phase. The first new shared component adds the inventory below.
+# [[inventory]]
+# dir = "lib/core/widgets"
+# glob = "*.dart"
+# doc = "docs/components"
+
+# Files that must change together in a pull request (C8). on = "any" (default) or "added".
+# [[co_change]]
+# when = "supabase/migrations/*.sql"
+# require = "docs/SCHEMA.md"

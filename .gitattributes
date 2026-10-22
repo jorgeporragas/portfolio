@@ -1,0 +1,2 @@
+# FLOW: the hook is a shell script and must keep LF endings on Windows checkouts.
+.githooks/* text eol=lf
