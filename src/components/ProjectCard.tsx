@@ -14,7 +14,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ title, description, tags, images, projectUrl, onOpenMedia }: ProjectCardProps) {
-  const { position, isHovering, ref, handleMouseMove, handleMouseLeave } = useMagneticHover(9);
+  const { position, isHovering, ref, handleMouseMove, handleMouseLeave } = useMagneticHover<HTMLDivElement>(9);
 
   const handleCardClick = () => {
     if (projectUrl) {

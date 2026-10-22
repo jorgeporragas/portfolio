@@ -4,7 +4,6 @@ import { useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { p } from "framer-motion/client";
 
 const devProjects = [
   {
@@ -42,7 +41,7 @@ function Lightbox({
     e?.stopPropagation();
     setDirection(newDirection);
     setCurrentIndex((prev) => {
-      let next = prev + newDirection;
+      const next = prev + newDirection;
       if (next < 0) return project.images.length - 1;
       if (next >= project.images.length) return 0;
       return next;

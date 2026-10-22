@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef, MouseEvent, ReactNode } from "react";
+import { ReactNode } from "react";
 import { useMagneticHover } from "@/hooks/useMagneticHover";
 
 interface GlowLinkProps {
@@ -12,7 +12,7 @@ interface GlowLinkProps {
 }
 
 export default function GlowLink({ href, children, label }: GlowLinkProps) {
-  const { position, isHovering, ref, handleMouseMove, handleMouseLeave } = useMagneticHover(8);
+  const { position, isHovering, ref, handleMouseMove, handleMouseLeave } = useMagneticHover<HTMLAnchorElement>(8);
 
   return (
     <Link

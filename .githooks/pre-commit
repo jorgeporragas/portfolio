@@ -1,0 +1,27 @@
+#!/bin/sh
+# FLOW pre-commit hook. Installed by flow_sync; do not edit (flow_check C10 verifies it).
+#
+# Runs flow_check's commit checks (C8) on the staged diff: the same rules CI runs on every
+# pull request. This hook is the early warning; CI is the check that counts, so a bypass
+# (git commit --no-verify) is legitimate and a missing Python only warns.
+#
+# Enable once per clone:   git config core.hooksPath .githooks
+
+for py in python3 python; do
+	if command -v "$py" >/dev/null 2>&1 && "$py" -c 'import tomllib' >/dev/null 2>&1; then
+		out=$("$py" .flow/flow_check.py --staged --only C8 2>&1)
+		status=$?
+		[ "$status" -ne 0 ] && printf '%s\n' "$out"  # silent when the commit owes nothing
+		if [ "$status" -eq 1 ]; then
+			printf '\nThis commit owes a doc update (above). Stage it and commit again,\n'
+			printf 'or bypass deliberately with: git commit --no-verify. CI will check it again.\n'
+			exit 1
+		fi
+		if [ "$status" -eq 2 ]; then
+			printf 'flow_check could not run (above). Not blocking the commit; CI will run it.\n'
+		fi
+		exit 0
+	fi
+done
+printf 'FLOW: Python 3.11+ not found, commit checks skipped. CI will run them.\n'
+exit 0

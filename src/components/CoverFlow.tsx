@@ -30,7 +30,7 @@ function CoverItem({
   setIsMenuOpen: (val: boolean) => void;
   totalItems: number; // NUEVO: Recibimos el total de proyectos
 }) {
-  const { position, ref, handleMouseMove, handleMouseLeave } = useMagneticHover(9);
+  const { position, ref, handleMouseMove, handleMouseLeave } = useMagneticHover<HTMLDivElement>(9);
   const isMobile = useIsMobile();
   const offset = index - activeIndex;
   const isActive = offset === 0;

@@ -120,11 +120,12 @@ Today's URLs (`/`, `/audio`, `/dev`, `/me`) keep working without redirects.
 
 Each phase is a GitHub milestone with the same name.
 
-1. **Foundation.** Close the security findings, stop scraping, install FLOW and CI. The live site
-   keeps running unchanged.
+1. **Foundation.** Close the security findings, install FLOW and CI. The live site keeps running
+   unchanged.
 2. **Brand** (design-system repo). The system's name, voice and tone, image treatment, and
    hand-drawn masters of the three marks.
-3. **Content.** Inventory and write everything listed under *Content at launch*.
+3. **Content.** Inventory and write everything listed under *Content at launch*, including the
+   release data and cover art that end the scraping.
 4. **Design.** Wireframes on one grid in grey, then high fidelity in both modes for each page type:
    home, section index, release, ad, case study, blog post.
 5. **Build.** Tokens, shared components, pages, content, player and motion.

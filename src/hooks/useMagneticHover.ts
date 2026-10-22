@@ -1,11 +1,11 @@
 // src/hooks/useMagneticHover.ts
 import { useState, useRef, MouseEvent } from "react";
 
-export function useMagneticHover(force: number = 9) {
+// Generic over the element type so each caller gets a correctly typed ref for its element.
+export function useMagneticHover<T extends HTMLElement>(force: number = 9) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  // Usamos un genérico para que funcione con <a>, <div>, etc.
-  const ref = useRef<any>(null);
+  const ref = useRef<T>(null);
 
   const handleMouseMove = (e: MouseEvent) => {
     setIsHovering(true);
