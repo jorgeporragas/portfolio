@@ -1,43 +1,53 @@
-# Jorge Porragas - Interactive Developer Portfolio
+# jorgeporragas.com
 
-> A highly interactive, responsive personal website featuring a custom 3D CoverFlow engine, glassmorphism UI overlays, and complex fluid layouts.
+## What this is
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-success?style=for-the-badge)](https://www.jorgeporragas.com)
+This is the code behind my website, jorgeporragas.com, where I keep my work in sound, software
+and other endeavors. I use the site as an opportunity to design and build a platform where I can
+showcase my work the way I want to. Building it is part of the work.
 
-## Architecture & Engineering
+I’m currently updating the old version based on my new design system.
 
-This portfolio is not a static template. It was engineered from the ground up to showcase advanced frontend capabilities, specifically focusing on complex UI choreography, performance, and seamless responsive design without relying on heavy external carousel libraries.
+## In case you want to run it
 
-### Key Technical Achievements:
+You’ll need Node.js 22.12 or newer and npm. Then:
 
-* **Custom 3D CoverFlow Engine:** Built entirely with Framer Motion. Implements spring physics for drag gestures, dynamic 3D perspective (`translateZ`, `rotateY`), and offset-based index calculations.
-* **Decoupled "Sibling" Component Architecture:** To solve traditional bounding-box and layout shift issues during drag interactions, the visual layer (the 3D disk stage) and the interactive UI layer (Project Overlay) are completely decoupled. They communicate via shared state, allowing extreme Z-index manipulation and perfect tap-to-dismiss behavior.
-* **Mathematical Fluid Layouts:** Replaced rigid CSS Media Queries with native CSS `clamp()` and viewport units (`vw`, `vh`). This ensures the UI is mathematically proportional on any screen size, from my small iPhone SE to a crisp 4K desktop monitor.
-* **Premium Glassmorphism & Z-Depth:** Utilizes deep CSS pseudo-elements to create intense, dynamic "blur trails" behind UI controls, ensuring perfect text readability over any dynamic image background while maintaining a strict `z-index` stacking context.
-
-## Tech Stack
-
-* **Framework:** Next.js (App Router)
-* **Language:** TypeScript
-* **Styling:** Tailwind CSS
-* **Animation Engine:** Framer Motion
-* **Deployment:** Vercel
-
-## Local Development
-
-1. Clone the repository:
-```bash
-git clone [https://github.com/jorgeporragas/portfolio.git](https://github.com/jorgeporragas/portfolio.git)
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-3. Run the deployment server:
-```bash
+```powershell
+git clone https://github.com/jorgeporragas/portfolio.git
+cd portfolio
+npm ci
 npm run dev
 ```
+
+Open http://localhost:3000 to see the site.
+
+Before I open a pull request, I run the same four checks CI does: `npm run lint`,
+`npm run typecheck`, `npm test` and `npm run build`. If one goes red, I fix it instead of
+skipping it.
+
+## Finding your way around
+
+Most of the thinking lives in `docs/`. A quick map:
+
+| If you want to know… | Look at |
+| --- | --- |
+| What the site is for, who it’s for, and what it will never do | [docs/PRD.md](docs/PRD.md) |
+| How it looks, and which version of my design system it follows | [docs/DESIGN.md](docs/DESIGN.md) |
+| Why it’s built the way it is | [docs/adr/](docs/adr/) |
+| How hosting and the domain are set up | [docs/runbooks/vercel.md](docs/runbooks/vercel.md) |
+| What a release, ad, project or post file looks like | [src/content/schema.ts](src/content/schema.ts) |
+| The house rules for writing code here | [CLAUDE.md](CLAUDE.md) |
+| What I’m working on next | [Issues](https://github.com/jorgeporragas/portfolio/issues) and [milestones](https://github.com/jorgeporragas/portfolio/milestones) on GitHub |
+
+## How I work on it
+
+I design the site myself, but I run the repo the way a real team would, for the practice. Every
+change goes through a pull request. CI checks it, Vercel builds a preview I click through on my
+phone, and merging to `main` is what ships it.
+
+The process has a name, FLOW, and its rules live in
+[.claude/rules/flow.md](.claude/rules/flow.md). It’s slower than pushing straight to `main`,
+which is the point.
 
 ## License & Copyright
 ### © 2026 Jorge Porragas. All Rights Reserved.
