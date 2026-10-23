@@ -23,6 +23,14 @@ the site is: [docs/PRD.md](docs/PRD.md). How it looks: [docs/DESIGN.md](docs/DES
   and spends the hosting quota.
 - Images go through `next/image`.
 
+## Public text
+
+- Every word a visitor reads is Jorge’s: pages, content files, alt text, page titles and
+  descriptions, the README. He writes it or approves it word for word. Draft only when he asks,
+  and never ship visible text he hasn’t signed off on.
+- It follows his voice:
+  [design-system › brand/VOICE.md](https://github.com/jorgeporragas/design-system/blob/main/brand/VOICE.md).
+
 ## Content
 
 - Each release, ad, project and post is one file, `content/<collection>/<slug>.mdx`, with YAML
