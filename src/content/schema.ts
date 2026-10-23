@@ -5,17 +5,28 @@ import { z } from "zod";
 /** The person the site is about. His roles on a work are the credits that name him. */
 export const SELF = "Jorge Porragas";
 
-/** Roles a credit can name. Adding one is a one-line change here. */
+/**
+ * Roles a credit can name. Adding one is a one-line change here. Credits say what the platforms
+ * say: a co-producer is credited as co-production, never as production (voice rule 2).
+ */
 export const ROLES = [
   "production",
+  "co-production",
   "additional-production",
   "songwriting",
+  "composition",
+  "arrangement",
   "vocals",
+  "background-vocals",
+  "guitar",
+  "bass",
+  "drums",
+  "synthesizer",
+  "programming",
   "recording",
   "mixing",
   "mastering",
   "sound-design",
-  "composition",
   "design",
   "development",
 ] as const;
@@ -73,13 +84,29 @@ const work = {
   links: z.array(link).default([]),
 };
 
-export const release = z.strictObject({
-  ...work,
-  artist: z.string().min(1),
-  format: z.enum(["single", "ep", "album"]),
-  cover: publicPath,
-  playback,
-});
+const releaseFormat = z.enum(["single", "ep", "album"]);
+
+/**
+ * A release, or one track of someone else's release (format "track"), which then names the
+ * release it's on. Its cover is that release's cover.
+ */
+export const release = z
+  .strictObject({
+    ...work,
+    artist: z.string().min(1),
+    format: z.enum([...releaseFormat.options, "track"]),
+    appearsOn: z.strictObject({ title: z.string().min(1), format: releaseFormat }).optional(),
+    cover: publicPath,
+    playback,
+  })
+  .superRefine((r, ctx) => {
+    if (r.format === "track" && !r.appearsOn) {
+      ctx.addIssue({ code: "custom", path: ["appearsOn"], message: "a track names the release it's on" });
+    }
+    if (r.format !== "track" && r.appearsOn) {
+      ctx.addIssue({ code: "custom", path: ["appearsOn"], message: "only a track is on another release" });
+    }
+  });
 
 export const ad = z.strictObject({
   ...work,

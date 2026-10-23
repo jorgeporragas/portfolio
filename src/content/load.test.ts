@@ -129,6 +129,47 @@ describe("loadContent", () => {
   });
 });
 
+describe("a track on someone else's release", () => {
+  const track = (overrides: Record<string, unknown> = {}) =>
+    release({
+      title: "hesperia",
+      artist: "Noah Pino Palo",
+      format: "track",
+      appearsOn: { title: "clásico", format: "album" },
+      ...overrides,
+    });
+
+  it("loads when it names the release it's on", () => {
+    write("public/images/releases/luz-nada.jpg", "");
+    write("content/releases/hesperia.mdx", mdx(track()));
+    expect(loadContent(root).releases[0].data.appearsOn).toEqual({ title: "clásico", format: "album" });
+  });
+
+  it("reports a track that doesn't say what it's on", () => {
+    write("public/images/releases/luz-nada.jpg", "");
+    write("content/releases/hesperia.mdx", mdx(track({ appearsOn: undefined })));
+    expect(problems()).toEqual([
+      "content/releases/hesperia.mdx: appearsOn: a track names the release it's on",
+    ]);
+  });
+
+  it("reports a single that claims to be on another release", () => {
+    write("public/images/releases/luz-nada.jpg", "");
+    write("content/releases/luz-nada.mdx", mdx(release({ appearsOn: { title: "x", format: "ep" } })));
+    expect(problems()).toEqual([
+      "content/releases/luz-nada.mdx: appearsOn: only a track is on another release",
+    ]);
+  });
+
+  it("accepts the roles the credits use", () => {
+    write("public/images/releases/luz-nada.jpg", "");
+    const credits = ["co-production", "background-vocals", "bass", "guitar", "drums", "synthesizer", "programming", "arrangement"]
+      .map((role) => ({ person: SELF, role }));
+    write("content/releases/hesperia.mdx", mdx(track({ credits })));
+    expect(problems()).toEqual([]);
+  });
+});
+
 describe("selfRoles", () => {
   it("lists Jorge's roles once each, in the order written, ignoring other people", () => {
     expect(selfRoles([
