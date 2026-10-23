@@ -41,7 +41,7 @@ summary, Jorge's roles, its artefacts, its links, and a body that tells the deci
 
 | Entity | Is a | Adds |
 |---|---|---|
-| **Release** | Work | Artist, format (single, EP, album), cover, playback |
+| **Release** | Work | Artist, format (single, EP, album, or a track on someone else's release, named), cover, playback |
 | **Ad** | Work | Brand, agency, the spot itself (audio or video), playback |
 | **Project** | Work | Stack, repository, status, screens |
 | **Post** | — | A blog entry of any kind: title, date, body; may reference the works it discusses |
@@ -49,6 +49,7 @@ summary, Jorge's roles, its artefacts, its links, and a body that tells the deci
 | **Link** | — | One platform and URL where a work also lives |
 
 - A work has many credits and many links; a post references zero or more works.
+- A credit names a role the way the platforms do: co-producer stays co-producer.
 - **Playback** is a property of each release or ad: `player` (Jorge's own player, hosted media),
   `embed` (the platform's player, loaded on click) or `links` (platform links only).
 - **Slim** is Jorge's artist name. Slim's releases are releases like any other, credited to Slim
