@@ -43,7 +43,7 @@ summary, Jorge's roles, its artefacts, its links, and a body that tells the deci
 |---|---|---|
 | **Release** | Work | Artist, format (single, EP, album, or a track on someone else's release, named), cover, playback |
 | **Ad** | Work | Brand, agency, the spot itself (audio or video), playback |
-| **Project** | Work | Stack, repository, status, screens |
+| **Project** | Work | Stack, repository, status, screens (each with alt text, and optionally its dark-mode version) |
 | **Post** | — | A blog entry of any kind: title, date, body; may reference the works it discusses |
 | **Credit** | — | One person in one role on one work. Jorge's roles are credits that name him |
 | **Link** | — | One platform and URL where a work also lives |
