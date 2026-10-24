@@ -170,6 +170,43 @@ describe("a track on someone else's release", () => {
   });
 });
 
+describe("a project's screens", () => {
+  const project = (screens: unknown[]) => ({
+    title: "sticky.md",
+    date: "2026-09-07",
+    summary: "Sticky notes that render markdown.",
+    credits: [{ person: SELF, role: "design" }],
+    stack: ["Tauri"],
+    status: "shipped",
+    screens,
+  });
+  const note = { src: "/images/projects/sticky-md/note-light.png", dark: "/images/projects/sticky-md/note-dark.png", alt: "A note." };
+
+  it("loads a screen with its dark-mode version", () => {
+    write("public/images/projects/sticky-md/note-light.png", "");
+    write("public/images/projects/sticky-md/note-dark.png", "");
+    write("content/projects/sticky-md.mdx", mdx(project([note])));
+    expect(loadContent(root).projects[0].data.screens).toEqual([note]);
+  });
+
+  it.each([
+    ["no alt text", { src: note.src }, "screens.0.alt"],
+    ["blank alt text", { src: note.src, alt: "  " }, "screens.0.alt: needs alt text"],
+  ])("reports a screen with %s", (_, screen, expected) => {
+    write("public/images/projects/sticky-md/note-light.png", "");
+    write("content/projects/sticky-md.mdx", mdx(project([screen])));
+    expect(problems().join("\n")).toContain(expected);
+  });
+
+  it("reports a dark-mode version that does not exist", () => {
+    write("public/images/projects/sticky-md/note-light.png", "");
+    write("content/projects/sticky-md.mdx", mdx(project([note])));
+    expect(problems()).toEqual([
+      "content/projects/sticky-md.mdx: /images/projects/sticky-md/note-dark.png does not exist under public/",
+    ]);
+  });
+});
+
 describe("selfRoles", () => {
   it("lists Jorge's roles once each, in the order written, ignoring other people", () => {
     expect(selfRoles([

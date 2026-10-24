@@ -80,7 +80,12 @@ function assetPaths(content: Content): [string, string][] {
   const paths: [string, string][] = [];
   for (const e of content.releases) paths.push([e.file, e.data.cover]);
   for (const e of content.ads) if (e.data.image) paths.push([e.file, e.data.image]);
-  for (const e of content.projects) for (const s of e.data.screens) paths.push([e.file, s]);
+  for (const e of content.projects) {
+    for (const s of e.data.screens) {
+      paths.push([e.file, s.src]);
+      if (s.dark) paths.push([e.file, s.dark]);
+    }
+  }
   return paths;
 }
 

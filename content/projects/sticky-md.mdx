@@ -1,0 +1,58 @@
+---
+title: sticky.md
+date: 2026-09-07
+summary: Sticky notes that render markdown. A fun little app.
+credits:
+  - person: Jorge Porragas
+    role: design
+  - person: Jorge Porragas
+    role: development
+stack:
+  - Tauri 2
+  - Rust
+  - Svelte 5
+  - TypeScript
+  - CodeMirror 6
+repository: https://github.com/jorgeporragas/stickymd
+status: shipped
+screens:
+  - src: /images/projects/sticky-md/note-light.png
+    dark: /images/projects/sticky-md/note-dark.png
+    alt: A note titled UI UX notes. The paragraph being edited shows its markdown asterisks; the title above it is rendered without them.
+  - src: /images/projects/sticky-md/hub-light.png
+    dark: /images/projects/sticky-md/hub-dark.png
+    alt: The notes hub, listing five notes with how long ago each was edited.
+  - src: /images/projects/sticky-md/settings-light.png
+    dark: /images/projects/sticky-md/settings-dark.png
+    alt: The settings window, with options for theme, what opens at launch, the notes folder and keyboard shortcuts.
+  - src: /images/projects/sticky-md/sketch.jpg
+    alt: A hand-drawn sketch of the notes hub and a note window, with notes on their controls and on the right-click menu for tables and code blocks.
+---
+
+## Why I built it
+
+I couldn’t find a lightweight text editor that renders markdown and works like a sticky note. You either download a markdown editor packed with stuff you don’t need, or you use Windows’ Sticky Notes, which doesn’t support markdown at all. It’s also tied to an account, syncs without asking, and launches on startup without asking.
+
+The idea behind sticky.md: it’s private, it has no features you don’t need, and it uses a portable format, markdown.
+
+It’s simple enough that it’s hard to get lost in. It does its job and doesn’t try to be more than it is. Waiting in the tray, sticky.md uses 4.9 MB of memory. With one note open, it uses 117 MB. It’s a scratchpad, so one note at a time is the normal case: it’s there when you need it, and takes up as little as possible when you don’t.
+
+## How it looks
+
+I find most modern app design boring. I don’t think something functional has to be, and sticky.md is me designing that way. It takes its personality from early-2000s desktops, with a hint of terminal in the mono type. Harmless fun.
+
+My first direction verged on overly decorative. What I landed on is a little more sober, while still being expressive.
+
+The notes are frosted glass. I like blur and frosted glass, but I wanted to use them with intent. The idea came from a stack of transparent post-its I owned. A see-through note is useful when it’s meant to sit on top of other things, and it felt like a more elegant solution than the typical yellow post-it. The blur doesn’t cost much to render here, either.
+
+## How I built it
+
+I drew the mockups on my iPad and turned those drawings into material for Claude Code. I run the project the way a small team would. Each change starts as a GitHub issue that says when it’s done. Claude Code writes it on a branch, CI runs the Rust tests and a check that rejects any colour outside the design tokens, and nothing reaches main until I’ve reviewed the pull request and merged it. The decisions on layout, stack and visual style are mine, each written down with its reasons in [a decision record](https://github.com/jorgeporragas/stickymd/tree/main/docs/adr).
+
+## What it taught me
+
+Shipping it taught me release engineering. I’d never set up auto-updates before. Now, pushing a version tag builds the installer on a clean GitHub runner and signs it, and every installed copy checks that signature before it updates. It also taught me how much we assume about how things will work, like where buttons go and what their symbols mean (Jakob’s Law).
+
+- Highlights painted into a control look right in light mode and wrong in dark mode.
+- Small buttons are harder to click (Fitts’s Law), and their symbols have little room to say what they are, so you have to get creative.
+- Text-scramble effects and the like are fun, but they need to stay away from content. They’re annoying when they get in the way.

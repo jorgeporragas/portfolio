@@ -117,12 +117,24 @@ export const ad = z.strictObject({
   playback,
 });
 
+/**
+ * One image of a project: a screenshot, or a sketch of one. Alt text is required because an
+ * image without it is invisible to a screen reader. `dark` is the same view in dark mode, shown
+ * instead of `src` when the visitor's system is dark.
+ */
+export const screen = z.strictObject({
+  src: publicPath,
+  dark: publicPath.optional(),
+  alt: z.string().trim().min(1, "needs alt text"),
+  caption: z.string().min(1).optional(),
+});
+
 export const project = z.strictObject({
   ...work,
   stack: z.array(z.string().min(1)).min(1),
   repository: httpsUrl.optional(),
   status: z.enum(["in-progress", "shipped", "archived"]),
-  screens: z.array(publicPath).default([]),
+  screens: z.array(screen).default([]),
 });
 
 /** A reference from a post to a work, as collection/slug: "releases/luz-nada". */
@@ -141,5 +153,6 @@ export type Credit = z.infer<typeof credit>;
 export type Release = z.infer<typeof release>;
 export type Ad = z.infer<typeof ad>;
 export type Project = z.infer<typeof project>;
+export type Screen = z.infer<typeof screen>;
 export type Post = z.infer<typeof post>;
 export type Role = (typeof ROLES)[number];
