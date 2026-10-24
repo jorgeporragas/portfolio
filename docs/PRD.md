@@ -102,7 +102,7 @@ Today's URLs (`/`, `/audio`, `/dev`, `/me`) keep working without redirects.
 **Content at launch**
 
 - Every release and ad whose hosting rights Jorge has confirmed, piece by piece.
-- Three or four development case studies, sticky.md among them.
+- Two development case studies: sticky.md and this site.
 - The About text and one or two blog posts.
 - Client work appears only with the client's agreement.
 
